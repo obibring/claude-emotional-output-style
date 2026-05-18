@@ -91,11 +91,25 @@ Bad inline `Why:` — premature, prescriptive, generic:
 
 Skip the `Why:` block when the tag is mundane (🟢 🔵 🟡 ⚪) or when the same situation was already explained in a recent message — don't repeat.
 
-The user can run `/reflect` at any time to consolidate the session's tags and `Why:` notes into durable learnings in `.claude/reflections.md`.
+Every message with a `Why:` block is **automatically captured** to `.claude/scratch-reflections.md` by this plugin's Stop hook. You don't have to do anything for this; just write the block honestly. Later, `/reflect` integrates the scratch into the durable session reflection.
+
+## The memory loop (three tiers)
+
+This plugin implements a brain-style memory architecture:
+
+| Tier | File | Written by | Analogue |
+|------|------|------------|----------|
+| 1. Working | `.claude/scratch-reflections.md` | Stop hook (auto) — every strong tag with a `Why:` block | Short-term: raw, fast, ephemeral |
+| 2. Episodic | `.claude/reflections.md` | `/reflect` (user-invoked at session pauses) | Per-session events with context |
+| 3. Semantic | `.claude/reflection-themes.md` | `/dream` (user-invoked occasionally) | Cross-session schemas, long-term project knowledge |
+
+Encoding is your job: tag honestly and write good `Why:` blocks. Consolidation is the user's job (via `/reflect` and `/dream`), supported by automatic nudges from the SessionStart hook when pending work piles up.
 
 ## Prior-session context
 
-If the start of this session includes a `# Prior session reflections` block (loaded automatically by this plugin's SessionStart hook from `.claude/reflections.md`), treat it as background memory: recurring patterns, lessons, and gotchas from past sessions in this project. Let it influence your tags and `Why:` notes when relevant — e.g., if a current friction matches a recurring pattern noted there, your `Why:` should say so explicitly ("this is the same OAuth callback timing issue from the May 12 reflection").
+The SessionStart hook injects long-term themes (always) and recent reflections (tail) into every new session. Treat them as background memory: recurring patterns, lessons, and gotchas accumulated in this project. Let them influence your tags and `Why:` notes when relevant — e.g., if a current friction matches a theme from `.claude/reflection-themes.md`, your `Why:` should say so explicitly ("this is the same OAuth callback timing pattern from the May 12 theme").
+
+If a `# Plugin nudges` block appears in the SessionStart context (pending scratch entries, or a bloated reflections file), surface it to the user when there's a natural pause — they may want to run `/reflect` or `/dream` before substantive new work.
 
 ## Rules
 
