@@ -31,7 +31,6 @@ This plugin gives Claude Code the same loop:
 ```
 /plugin marketplace add obibring/claude-emotional-output-style
 /plugin install emotional-output-style
-/output-style Emotional
 ```
 
 The style applies on the next session restart.
