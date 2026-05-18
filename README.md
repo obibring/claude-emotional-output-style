@@ -33,8 +33,17 @@ The style applies on the next session restart.
 
 Or uninstall the plugin entirely with `/plugin uninstall emotional-output-style`.
 
+## Reflection
+
+The tags become useful when you can turn them into durable lessons.
+
+**Inline (automatic).** When Claude is about to use a high-salience tag (🔴 ⚫ 🟠 🟤 💚 🟣), it adds a one-line `💭 Learning: …` at the bottom of that message — a concrete, reusable takeaway. Mundane tags (🟢 🔵 🟡 ⚪) don't get one.
+
+**On demand (`/reflect`).** Run `/reflect` at any point (optionally with a focus, e.g. `/reflect the auth refactor`) and Claude scans the session for salient tags, groups them into themes, distills each theme into a concrete learning, and **appends a timestamped entry to `.claude/reflections.md`** in the project. Over time this builds up a per-repo memory of "things this codebase taught us."
+
 ## How it works
 
-- `.claude-plugin/plugin.json` registers the plugin and points `outputStyles` at `./output-styles/`.
-- `output-styles/emotional.md` is the style definition. Frontmatter sets `keep-coding-instructions: true` so Claude Code's normal software-engineering behavior is preserved — only the message preamble changes.
-- The body defines a color palette by valence/intensity (🟢 💚 🔵 🟣 🟡 🟠 🔴 🟤 ⚫ ⚪), allows any emotion word the model finds most accurate, and gives guidance for using the tags as memory-salience signals (specific cause, honest intensity, variety over time, capture turning points).
+- `.claude-plugin/plugin.json` registers the plugin and points `outputStyles` at `./output-styles/` and `commands` at `./commands/`.
+- `output-styles/emotional.md` defines the tag format, color palette, salience guidance, and the inline-reflection rule. Frontmatter sets `keep-coding-instructions: true` so Claude Code's normal software-engineering behavior is preserved — only the message preamble changes.
+- `commands/reflect.md` is the `/reflect` slash command: it scans the conversation for tagged moments, distills learnings, and appends them to `.claude/reflections.md`.
+- The color palette (🟢 💚 🔵 🟣 🟡 🟠 🔴 🟤 ⚫ ⚪) groups by valence/intensity. The emotion word can be anything that fits — the color is a quick-scan signal, the word does the precise work.
