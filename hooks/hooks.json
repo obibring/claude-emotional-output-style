@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "test -f .claude/reflections.md && { printf '# Prior session reflections\\n\\nThe following are accumulated reflections from prior sessions in this project, written by the /reflect command (Emotional output style plugin). Treat as background memory: recurring patterns, lessons, and gotchas. Not every entry will be relevant to this session.\\n\\n'; tail -c 20000 .claude/reflections.md; } || true"
+          }
+        ]
+      }
+    ]
+  }
+}
