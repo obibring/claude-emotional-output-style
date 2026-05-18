@@ -1,6 +1,6 @@
 {
   "name": "emotional-output-style",
   "version": "0.1.0",
-  "description": "Adds an output style that prefixes every Claude Code message with a color-coded emotion indicator, from calm green to panicking red.",
+  "description": "Adds an output style that prefixes every Claude Code message with a color-coded emotion tag. Any emotion is fair game — the tag works as a memory-salience signal for later reflection on the session.",
   "outputStyles": "./output-styles/"
 }
