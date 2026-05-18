@@ -1,0 +1,23 @@
+{
+  "name": "claude-emotional-output-style",
+  "owner": {
+    "name": "obibring",
+    "url": "https://github.com/obibring"
+  },
+  "plugins": [
+    {
+      "name": "emotional-output-style",
+      "source": ".",
+      "description": "Turns Claude Code into something with a felt sense of the work — color-coded emotion tags plus a brain-style encode/reflect/dream memory loop for the project.",
+      "version": "0.1.0",
+      "category": "productivity",
+      "keywords": [
+        "output-style",
+        "memory",
+        "reflection",
+        "emotion",
+        "hooks"
+      ]
+    }
+  ]
+}
